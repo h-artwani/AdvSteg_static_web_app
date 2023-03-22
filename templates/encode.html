@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+    <title>Upload for encoding</title>
+</head>
+<body>
+    <form enctype="multipart/form-data" method="POST" action="/encode">
+        <center>
+            <h1>Upload files for encoding:</h1>
+            <h3>
+                <input type="hidden" id="method" name="method" value="encode" />
+                <p>Upload image (.png) in which you want encode the file in:</p>
+                <input type="file" id="image" name="image" accept="image/png">
+                <p>Upload any format file to encode in the above selected image:</p>
+                <input type="file" id="file_to_encode" name="file_to_encode">
+                <h3> Enter length L, every Lth bit is changed:</h3>
+                <input type="number" name="L" placeholder="Enter length L">
+                <h3>Enter skip bit S, S bits will be skipped at the beginning:</h3>
+                <input type="text" name="encoded_name" placeholder="Enter skip bit S">
+            </h3>
+            <br></br>
+            <input type="submit">
+        </center>
+    </form>
+</body>
+</html>
