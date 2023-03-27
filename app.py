@@ -3,11 +3,6 @@ from steg_advanced import encode_img, decode_file
 import os
 import cv2
 
-key = os.environ["COG_SERVICE_KEY"]
-region = os.environ["COG_SERVICE_REGION"]
-endpoint = os.environ["ENDPOINT"]
-COG_endpoint = os.environ["COG_SERVICE_ENDPOINT"]
-
 app = Flask(__name__)
 
 
