@@ -3,6 +3,8 @@ click
 contourpy
 cycler
 Flask
+Flask-SQLAlchemy
+flask-login
 fonttools
 importlib-metadata
 importlib-resources

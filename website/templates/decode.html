@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1 align="center">Type the file name you want to decode:</h1>
+<form method="POST" action="/decode">
+    <div>
+        <div>
+            <center>
+                <input type="text" name="encoded_name" placeholder="Type the file name you want to decode">
+                <input type="hidden" id="method" name="method" value="decode" />
+                <br></br>
+                <input type="submit">
+                <br></br>
+                <h3>List of encoded files:</h3>
+            </center>
+        </div>
+        <div>
+            <ul>
+                {% for name in list_files %}
+                <li>
+                    {{name}}
+                    <br>
+                    <img src="/static/encoded_images/{{name}}" alt="{{name}}" width=30% height=auto>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</form>
+{% endblock %}

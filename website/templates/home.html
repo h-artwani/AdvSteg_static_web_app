@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1 align="center">Select a method:</h1>
+<form method="POST" action="/method">
+  <center>
+    <h3>
+      <input type="hidden" id="user" name="user" value="{{user}}" />
+      <!-- <a href="encode">Encode</a>
+      <a href="decode?list_files={{encoded_images_list}}">Decode</a> -->
+      <input type="radio" id="html" name="method" value="encode">
+      <label for="html">Encode</label><br>
+      <input type="radio" id="css" name="method" value="decode">
+      <label for="css">Decode</label><br>
+    </h3>
+    <input type="submit">
+  </center>
+</form>
+{% endblock %}

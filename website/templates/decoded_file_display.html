@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+    %}
+    <h1 align="center">Decoded File</h1>
+    
+    <form method="POST" action="/method">
+        <center>
+            <h3>Decoded file is either displayed or downloaded automatically.</h3>
+            <embed type="application/pdf" src="{{ filename }}" width="50%" height="auto">
+            <br></br>
+            <a href="/">Back to Home page</a>
+    
+        </center>
+    </form>
+    {% endblock %}

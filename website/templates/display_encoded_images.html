@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+    %}
+    <h1 align="center">Below are the encoded files from the users:</h1>
+    <form method="POST" action="/decode">
+        <div>
+            <div>
+                <ul>
+                    {% for name in list_files %}
+                    <li>
+                        {{name}}
+                        <br>
+                        <img src="/static/encoded_images/{{name}}" alt="{{name}}" width=30% height=auto>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </form>
+    {% endblock %}
