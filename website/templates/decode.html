@@ -1,12 +1,18 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
 %}
-<h1 align="center">Type the file name you want to decode:</h1>
+<h1 align="center">Provide following details for decoding:</h1>
 <form method="POST" action="/decode">
     <div>
         <div>
             <center>
+                <h3>Type the file name you want to decode:</h3>
                 <input type="text" name="encoded_name" placeholder="Type the file name you want to decode">
                 <input type="hidden" id="method" name="method" value="decode" />
+                <h3> Enter length L, every Lth bit was changed:</h3>
+                <input type="number" name="L" id="Lth_bit" min="2" max="8" required>
+                <h3>Enter skip bit S, S bits are skipped at the beginning:</h3>
+                <input type="number" name="S" id="S_bits" min="1" max="7" required>
+                <h3>Note: Sum of S and L should be less than 8.</h3>
                 <br></br>
                 <input type="submit">
                 <br></br>

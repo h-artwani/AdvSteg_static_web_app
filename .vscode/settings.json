@@ -29,5 +29,7 @@
         "env.bak{,/**}",
         "venv.bak{,/**}",
         ".vscode{,/**}"
-    ]
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/b10b927d-c6a4-4cc6-8336-34db025bd011/resourceGroups/rg01/providers/Microsoft.Web/sites/adv-steg-web-app-1",
+    "appService.deploySubpath": "."
 }

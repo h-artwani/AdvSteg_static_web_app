@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
-import json
 from .steg_advanced import encode_img, decode_file
 import os
 import cv2
@@ -8,9 +7,6 @@ import cv2
 views = Blueprint('views', __name__)
 
 UPLOAD_FOLDER = "website/static/"
-
-# with open(UPLOAD_FOLDER + "data.json") as json_file:
-#     store_dict = json.load(json_file)
 
 store_dict = {}
 
@@ -55,12 +51,14 @@ def decode():
         method = request.form['method']
         if method == "decode":
             encoded_name = request.form['encoded_name']
-            return name(method=method, file_to_encode="", image=encoded_name, lth_bit=0, s_bit=0)
+            lth_bit = int(request.form['L'])
+            s_bit = int(request.form['S'])
+
+            return name(method=method, file_to_encode="", image=encoded_name, lth_bit=lth_bit, s_bit=s_bit)
     return render_template('decode.html', request_method = request_method, list_files=list_files)
 
 def name(method, file_to_encode, image, lth_bit, s_bit):
     if method == "encode":
-        temp_list = []
         image_name = image.filename
         image.save(os.path.join(UPLOAD_FOLDER + 'uploaded_images_for_encode', image_name))
         file_to_encode.save(os.path.join(UPLOAD_FOLDER + 'uploaded_files_to_encode', file_to_encode.filename))
@@ -72,14 +70,6 @@ def name(method, file_to_encode, image, lth_bit, s_bit):
         filename, ext = file.split(".")
         output_image = "./website/static/encoded_images/"+f"{filename}_encoded.{ext}"
         print(output_image)
-        temp_list.append(lth_bit)
-        temp_list.append(s_bit)
-        store_dict[f"{filename}_encoded.{ext}"] = temp_list
-        # Serializing json
-        json_object = json.dumps(store_dict, indent=4)
-        # Writing to data.json
-        with open(UPLOAD_FOLDER + "data.json", "w") as outfile:
-            outfile.write(json_object)
         encoded_image = encode_img(image_name=input_image, secret_data=file_to_encode, lth_bit=lth_bit, s_bit=s_bit)
         cv2.imwrite(output_image, encoded_image)
         print("[+] Saved encoded image.")
@@ -87,11 +77,6 @@ def name(method, file_to_encode, image, lth_bit, s_bit):
         return render_template('encoded_image_display.html', user_image=output_image, user= current_user)
 
     elif method == "decode":
-        with open(UPLOAD_FOLDER + "data.json") as json_file:
-            data = json.load(json_file)
-        temp_list = data[image]
-        lth_bit = temp_list[0]
-        s_bit = temp_list[1]
         decoded_data = decode_file(UPLOAD_FOLDER + 'encoded_images/' + image, lth_bit=lth_bit, s_bit=s_bit)
         print(decoded_data)
         final = decoded_data[7:]
